@@ -35,7 +35,7 @@
 #
 # Copyright 2013 Your name here, unless otherwise noted.
 #
-class icclab-os {
+class icclab {
 
 
 }
