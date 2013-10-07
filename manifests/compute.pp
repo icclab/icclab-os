@@ -1,4 +1,4 @@
-class icclab::compute{
+class icclab::compute inherits icclab::base {
 
   include icclab::params
 

@@ -1,4 +1,4 @@
-class icclab::controller{
+class icclab::controller inherits icclab::base {
 
   include icclab::params
   include 'apache'
@@ -6,9 +6,7 @@ class icclab::controller{
   $public_interface         = 'eth1'
   $traffic_egress_interface = 'eth1' #note these two are combined
 
-  # TODO: configure adapters - eth0 and eth1
-
-  # TODO: setup the apt-cache
+  # TODO: configure adapter br-ex -> eth1, promiscious mode, assign IP
 
   class { 'openstack::controller':
 

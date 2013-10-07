@@ -8,5 +8,7 @@ class icclab::params{
 	# set to 'kvm' if deploying on metal
 	$libvirt                      = 'qemu'
 	$enabled_apis                 = 'ec2,osapi_compute,metadata'
+	$ntp_servers                  = ['time.apple.com iburst', 'pool.ntp.org iburst', 'clock.redhat.com iburst']
+	$NewRelic_API_Key             = ''
   /* --------------------------------------------------*/
 }
