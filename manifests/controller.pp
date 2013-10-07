@@ -1,4 +1,6 @@
-class icclab::controller inherits icclab::base {
+class icclab::controller {
+
+  # inherits icclab::base
 
   include icclab::params
   include 'apache'
