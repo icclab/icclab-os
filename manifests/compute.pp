@@ -40,7 +40,7 @@ class icclab::compute {
       file { "/etc/network/interfaces":
         path    => '/etc/network/interfaces',
         ensure  => file,
-        content => template('icclab-os/compute_interfaces.erb'),
+        content => template('icclab/compute_interfaces.erb'),
         owner   => "root",
         group   => "root",
         mode    => 750,
