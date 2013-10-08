@@ -1,0 +1,19 @@
+# internal management interface
+auto <%= scope.lookupvar("icclab::params::private_interface") %>
+iface <%= scope.lookupvar("icclab::params::private_interface") %> inet dhcp
+
+# adapter to bridge
+auto <%= scope.lookupvar("icclab::params::public_interface") %>
+iface <%= scope.lookupvar("icclab::params::public_interface") %> inet manual
+up ifconfig $IFACE 0.0.0.0 up
+up ip link set $IFACE promisc on
+down ip link set $IFACE promisc off
+down ifconfig $IFACE down
+
+# bridge interface - ip assigned to this
+auto <%= scope.lookupvar("icclab::params::external_bridge_name") %>
+iface <%= scope.lookupvar("icclab::params::external_bridge_name") %> inet static
+address <%= scope.lookupvar("icclab::params::controller_node_ext_address") %>
+netmask 255.255.255.0
+# gateway 192.168.100.1   # not needed managed by quantum
+# dns-nameservers 8.8.8.8 # not needed managed by quantum

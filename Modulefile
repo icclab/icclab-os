@@ -1,11 +1,10 @@
 name    'icclab-os'
 version '0.1.0'
-source 'UNKNOWN'
-author 'icclab'
+source 'https://github.com/dizz/icclab-os'
+author 'Andy Edmonds'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+summary 'Sets up OpenStack Grizzly for the ICCLab'
+description 'Sets up OpenStack Grizzly for the ICCLab'
+project_page 'https://github.com/dizz/icclab-os'
 
-## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/openstack', '2.1.0'
