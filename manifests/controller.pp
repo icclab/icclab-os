@@ -48,7 +48,7 @@ class icclab::controller {
     file { "/etc/network/interfaces":
       path    => '/etc/network/interfaces',
       ensure  => file,
-      content => template('icclab/controller_interface.erb'),
+      content => template('icclab/controller_interfaces.erb'),
       owner   => "root",
       group   => "root",
       mode    => 750,
