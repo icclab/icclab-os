@@ -1,15 +1,15 @@
 class icclab::compute {
-
   include icclab::params
   include icclab::base # installs ntp, newrelic
 
+
   class { 'openstack::compute':
     # network
-    internal_address      => $ipaddress_eth0, # fixme
+    internal_address      => $ipaddress_eth0,
     private_interface     => $icclab::params::private_interface, # eth0
 
     # quantum
-    ovs_local_ip          => $ipaddress_eth0, # fixme
+    ovs_local_ip          => $ipaddress_eth0,
     quantum_auth_url      => "http://${icclab::params::controller_node_int_address}:35357/v2.0",
     keystone_host         => $icclab::params::controller_node_int_address,
     quantum_host          => $icclab::params::controller_node_int_address,
@@ -38,7 +38,7 @@ class icclab::compute {
       owner   => "root",
       group   => "root",
       mode    => 750,
-      #notify  => Service["networking"],
+    # notify  => Service["networking"],
     }
   } else {
     warning { "Cannot modify network settings. Only ubuntu is currently supported. You will need to make the changes manually.": }

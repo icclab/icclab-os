@@ -1,5 +1,4 @@
 class icclab::controller {
-
   include icclab::params
   include icclab::base # installs ntp, newrelic
   include 'apache'
@@ -9,7 +8,7 @@ class icclab::controller {
     public_interface       => $icclab::params::public_interface, # eth1
     private_interface      => $icclab::params::private_interface, # eth0
 
-    public_address         => $ipaddress_eth1, # fixme
+    public_address         => $icclab::params::controller_node_ext_address,
     internal_address       => $icclab::params::controller_node_int_address,
     admin_address          => $icclab::params::controller_node_int_address,
     # quantum
@@ -52,9 +51,19 @@ class icclab::controller {
       owner   => "root",
       group   => "root",
       mode    => 750,
-      #notify  => Service["networking"],
+    # notify  => Service["networking"],
     }
   } else {
     warning { "Cannot modify network settings. Only ubuntu is currently supported. You will need to make the changes manually.": }
   }
+
+  glance_image { "Cirros 0.3.1 x86_64":
+    ensure           => present,
+    name             => "Cirros 0.3.1 x86_64",
+    is_public        => yes,
+    container_format => bare,
+    disk_format      => 'qcow2',
+    source           => 'http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-disk.img',
+  }
 }
+    }
