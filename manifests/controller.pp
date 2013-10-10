@@ -66,4 +66,3 @@ class icclab::controller {
     source           => 'http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-disk.img',
   }
 }
-    }
