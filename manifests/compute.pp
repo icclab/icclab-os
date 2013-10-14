@@ -1,4 +1,5 @@
 class icclab::compute {
+  
   include icclab::params
   include icclab::base # installs ntp, newrelic
 
@@ -27,7 +28,8 @@ class icclab::compute {
     verbose               => $icclab::params::verbose,
     rabbit_host           => $icclab::params::controller_node_int_address,
     glance_api_servers    => "${icclab::params::controller_node_int_address}:9292",
-    vncproxy_host         => $icclab::params::controller_node_int_address,
+    #vncproxy_host         => $icclab::params::controller_node_int_address,
+    vncproxy_host         => $icclab::params::controller_node_ext_address,
   }
 
   if $::operatingsystem == 'Ubuntu' {

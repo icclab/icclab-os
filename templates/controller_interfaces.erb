@@ -15,5 +15,5 @@ auto <%= scope.lookupvar("icclab::params::external_bridge_name") %>
 iface <%= scope.lookupvar("icclab::params::external_bridge_name") %> inet static
 address <%= scope.lookupvar("icclab::params::controller_node_ext_address") %>
 netmask 255.255.255.0
-# gateway 192.168.100.1   # not needed managed by quantum
-# dns-nameservers 8.8.8.8 # not needed managed by quantum
+gateway <%= scope.lookupvar("$icclab::params::foreman_svcs") %>
+dns-nameservers <%= scope.lookupvar("$icclab::params::foreman_svcs") %>
