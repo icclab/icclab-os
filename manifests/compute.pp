@@ -40,7 +40,12 @@ class icclab::compute {
 
   class {'icclab::networking':
     network_interface_template => 'icclab/compute_interfaces.erb',
+    require => Class['Openstack::Compute'],
   }
 
-  include icclab::ceilometer::compute
+  if $icclab::params::install_ceilometer {
+    class {'icclab::ceilometer::compute': 
+      require => Class['Openstack::Compute'],
+    }
+  }
 }

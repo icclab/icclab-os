@@ -44,11 +44,26 @@ class icclab::controller {
     controller_node      => '127.0.0.1',
   }
 
-  include icclab::ceilometer::controller
-
   class {'icclab::networking':
     network_interface_template => 'icclab/controller_interfaces.erb',
+    require => Class['Openstack::Controller'],
   }
 
-  class {'icclab::images': }
+  if $icclab::params::install_images {
+    class {'icclab::images': 
+      require => Class['Openstack::Controller'],
+    }
+  }
+
+  if $icclab::params::install_ceilometer {
+    class { 'icclab::ceilometer::controller': 
+      require => Class['Openstack::Controller'],
+    }
+  }
+
+  if $icclab::params::install_haas {
+    class {'icclab::haas': 
+      require => Class['Openstack::Controller'],
+    }
+  }
 }

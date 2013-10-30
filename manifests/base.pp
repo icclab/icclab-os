@@ -7,7 +7,6 @@ class icclab::base {
 		servers    => $icclab::params::ntp_servers,
 	}
 
-	# TODO: fixme, I timeout on the 1st run, not the 2nd
 	if $icclab::params::NewRelic_API_Key {
 		newrelic::server { 'controller': 
 			newrelic_license_key => $icclab::params::NewRelic_API_Key,

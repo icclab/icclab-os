@@ -46,6 +46,6 @@ class icclab::haas {
 		savanna_host          => '127.0.0.1',
 	    savanna_port          => '8386',
 	    use_neutron           => true,
-		savanna_dev_dashboard => true,
+		require               => Class['Openstack::Horizon']
 	}
 }
