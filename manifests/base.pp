@@ -1,5 +1,7 @@
 class icclab::base {
 
+	include icclab::params
+	
 	#ensure ntp installed on all nodes
 	class { 'ntp':
 		servers    => $icclab::params::ntp_servers,

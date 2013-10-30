@@ -1,3 +1,13 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+<% if scope.lookupvar("icclab::params::is_vagrant") %>
+# vagrant's management interface
+auto eth0
+iface eth0 inet dhcp
+<% end %>
+
 # internal management interface
 auto <%= scope.lookupvar("icclab::params::private_interface") %>
 iface <%= scope.lookupvar("icclab::params::private_interface") %> inet dhcp

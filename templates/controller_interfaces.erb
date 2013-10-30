@@ -1,3 +1,13 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+<% if scope.lookupvar("icclab::params::is_vagrant") %>
+# vagrant's management interface
+auto eth0
+iface eth0 inet dhcp
+<% end %>
+
 # internal management interface
 auto <%= scope.lookupvar("icclab::params::private_interface") %>
 iface <%= scope.lookupvar("icclab::params::private_interface") %> inet dhcp
@@ -15,5 +25,5 @@ auto <%= scope.lookupvar("icclab::params::external_bridge_name") %>
 iface <%= scope.lookupvar("icclab::params::external_bridge_name") %> inet static
 address <%= scope.lookupvar("icclab::params::controller_node_ext_address") %>
 netmask 255.255.255.0
-gateway <%= scope.lookupvar("icclab::params::foreman_svcs") %>
-dns-nameservers <%= scope.lookupvar("icclab::params::foreman_svcs") %>
+# gateway <%= scope.lookupvar("icclab::params::foreman_svcs") %>
+# dns-nameservers <%= scope.lookupvar("icclab::params::foreman_svcs") %>
