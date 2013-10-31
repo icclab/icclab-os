@@ -21,8 +21,8 @@ class icclab::params{
   $foreman_svcs                 = '192.168.100.2'
 
   if $is_vagrant {
-    $libvirt                      = 'qemu'
+    $libvirt                    = 'qemu'
   } else {
-    $libvirt                      = 'kvm'
+    $libvirt                    = 'kvm'
   }
 }

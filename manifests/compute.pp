@@ -1,7 +1,7 @@
 class icclab::compute {
   
   include icclab::params
-  include icclab::base # installs ntp, newrelic
+   # installs ntp, newrelic
 
   #use stages so we've a little more ordering
   
@@ -11,6 +11,8 @@ class icclab::compute {
   else {
     $internal_address_tmp = $ipaddress_eth0
   }
+
+  class { 'icclab::base':} ->
 
   class { 'openstack::compute':
     # network
@@ -36,7 +38,7 @@ class icclab::compute {
     rabbit_host           => $icclab::params::controller_node_int_address,
     glance_api_servers    => "${icclab::params::controller_node_int_address}:9292",
     vncproxy_host         => $icclab::params::controller_node_ext_address,
-  }
+  } ->
 
   class {'icclab::networking':
     network_interface_template => 'icclab/compute_interfaces.erb',

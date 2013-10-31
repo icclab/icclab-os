@@ -1,9 +1,10 @@
 class icclab::controller {
+  
   include icclab::params
-  include icclab::base # installs ntp, newrelic
   include 'apache'
 
   #use stages so we've a little more ordering
+  class { 'icclab::base':} ->
 
   class { 'openstack::controller':
     # network
@@ -36,13 +37,13 @@ class icclab::controller {
     quantum_user_password  => $icclab::params::one_to_rule_them_all,
     quantum_db_password    => $icclab::params::one_to_rule_them_all,
     secret_key             => $icclab::params::one_to_rule_them_all,
-  }
+  } ->
 
   class { 'openstack::auth_file':
     admin_password       => $icclab::params::one_to_rule_them_all,
     keystone_admin_token => $icclab::params::one_to_rule_them_all,
     controller_node      => '127.0.0.1',
-  }
+  } ->
 
   class {'icclab::networking':
     network_interface_template => 'icclab/controller_interfaces.erb',

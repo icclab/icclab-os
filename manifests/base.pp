@@ -2,7 +2,6 @@ class icclab::base {
 
 	include icclab::params
 	
-	#ensure ntp installed on all nodes
 	class { 'ntp':
 		servers    => $icclab::params::ntp_servers,
 	}
@@ -11,7 +10,5 @@ class icclab::base {
 		newrelic::server { 'controller': 
 			newrelic_license_key => $icclab::params::NewRelic_API_Key,
 		}
-	}else {
-		warning ('Cannot install newrelic, NewRelic_API_Key is not set')
 	}
 }

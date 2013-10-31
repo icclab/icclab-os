@@ -6,11 +6,17 @@ iface lo inet loopback
 # vagrant's management interface
 auto eth0
 iface eth0 inet dhcp
-<% end %>
 
-# internal management interface
+# openstack internal management interface
+auto <%= scope.lookupvar("icclab::params::private_interface") %>
+iface <%= scope.lookupvar("icclab::params::private_interface") %> inet static
+address <%= scope.lookupvar("icclab::params::controller_node_int_address") %>
+netmask 255.255.255.0
+<% else %>
+# openstack internal management interface
 auto <%= scope.lookupvar("icclab::params::private_interface") %>
 iface <%= scope.lookupvar("icclab::params::private_interface") %> inet dhcp
+<% end %>
 
 # adapter to bridge
 auto <%= scope.lookupvar("icclab::params::public_interface") %>
@@ -20,7 +26,7 @@ up ip link set $IFACE promisc on
 down ip link set $IFACE promisc off
 down ifconfig $IFACE down
 
-# bridge interface - ip assigned to this
+# openstack bridge interface - ip assigned to this, managed by openvswitch
 auto <%= scope.lookupvar("icclab::params::external_bridge_name") %>
 iface <%= scope.lookupvar("icclab::params::external_bridge_name") %> inet static
 address <%= scope.lookupvar("icclab::params::controller_node_ext_address") %>
