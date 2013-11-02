@@ -12,6 +12,7 @@ class icclab::params{
   $install_images               = false
   $install_haas                 = false
   $install_ceilometer           = false
+  $install_heat                 = false
   /* --------------------------------------------------*/
 
   $enabled_apis                 = 'ec2,osapi_compute,metadata'

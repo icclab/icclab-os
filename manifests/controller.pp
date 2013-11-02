@@ -67,4 +67,10 @@ class icclab::controller {
       require => Class['Openstack::Controller'],
     }
   }
+
+  if $icclab::params::install_heat {
+    class {'icclab::heat': 
+      require => Class['Openstack::Controller'],
+    }
+  }
 }
