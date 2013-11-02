@@ -14,7 +14,7 @@ class icclab::controller {
     public_address         => $icclab::params::controller_node_ext_address,
     internal_address       => $icclab::params::controller_node_int_address,
     admin_address          => $icclab::params::controller_node_int_address,
-    # quantum
+    # neutron
     external_bridge_name   => $icclab::params::external_bridge_name,
     bridge_interface       => $icclab::params::traffic_egress_interface, # what br-ex gets connected to - eth1
     metadata_shared_secret => $icclab::params::one_to_rule_them_all,
@@ -34,8 +34,8 @@ class icclab::controller {
     nova_user_password     => $icclab::params::one_to_rule_them_all,
     cinder_db_password     => $icclab::params::one_to_rule_them_all,
     cinder_user_password   => $icclab::params::one_to_rule_them_all,
-    quantum_user_password  => $icclab::params::one_to_rule_them_all,
-    quantum_db_password    => $icclab::params::one_to_rule_them_all,
+    neutron_user_password  => $icclab::params::one_to_rule_them_all,
+    neutron_db_password    => $icclab::params::one_to_rule_them_all,
     secret_key             => $icclab::params::one_to_rule_them_all,
   } ->
 
