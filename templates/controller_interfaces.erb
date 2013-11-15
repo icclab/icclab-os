@@ -33,3 +33,5 @@ address <%= scope.lookupvar("icclab::params::controller_node_ext_address") %>
 netmask 255.255.255.0
 # gateway <%= scope.lookupvar("icclab::params::foreman_svcs") %>
 # dns-nameservers <%= scope.lookupvar("icclab::params::foreman_svcs") %>
+gateway <%= scope.lookupvar("icclab::params::controller_gateway") %>
+dns-nameservers <%= scope.lookupvar("icclab::params::controller_nameserver") %>
