@@ -22,7 +22,8 @@ class icclab::params{
   $external_bridge_name         = 'br-ex'
   $verbose                      = true
   $foreman_svcs                 = '192.168.100.2'
-
+  $controller_gateway           = '160.85.4.1'
+  $controller_nameserver        = '8.8.8.8'
   if $is_vagrant {
     $libvirt                    = 'qemu'
   } else {
