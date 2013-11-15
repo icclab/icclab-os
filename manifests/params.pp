@@ -11,10 +11,10 @@ class icclab::params{
 	$private_interface            = 'eth1' #10.10.10.0/24
 	$NewRelic_API_Key             = ''
   $install_images               = false
-  $install_haas                 = true
+  $install_haas                 = false
   $install_ceilometer           = false
   $install_heat                 = false
-  $use_ryu                      = true
+  $use_ryu                      = false
   /* --------------------------------------------------*/
 
   $enabled_apis                 = 'ec2,osapi_compute,metadata'
