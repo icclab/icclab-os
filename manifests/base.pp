@@ -12,4 +12,9 @@ class icclab::base {
 			newrelic_license_key => $icclab::params::NewRelic_API_Key,
 		}
 	}
+
+	# setup ubuntu cloud repos
+	class {'openstack::repo::uca':
+		release => $icclab::params::os_version,
+	}
 }

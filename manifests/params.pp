@@ -1,6 +1,7 @@
 class icclab::params{
 
   /* ---------------Important to set!------------------*/
+  $os_version                   = 'havana' # can be 'havana' or 'grizzly'
   $is_vagrant                   = true
 	$one_to_rule_them_all         = 'admin'
 	$controller_node_int_address  = '10.10.10.51'
@@ -10,9 +11,10 @@ class icclab::params{
 	$private_interface            = 'eth1' #10.10.10.0/24
 	$NewRelic_API_Key             = ''
   $install_images               = false
-  $install_haas                 = false
+  $install_haas                 = true
   $install_ceilometer           = false
   $install_heat                 = false
+  $use_ryu                      = true
   /* --------------------------------------------------*/
 
   $enabled_apis                 = 'ec2,osapi_compute,metadata'

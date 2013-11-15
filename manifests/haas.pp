@@ -4,6 +4,7 @@ class icclab::haas {
 
 	class { 'savanna::db::mysql':
 		password      => $icclab::params::one_to_rule_them_all,
+		allowed_hosts => ['127.0.0.1',$icclab::params::controller_node_int_address],
 	}
 
     class {'savanna::keystone::auth':

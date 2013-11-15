@@ -24,7 +24,7 @@ class icclab::heat {
 		internal_address   => $icclab::params::controller_node_int_address,
 	} ->
 
-	class { 'heat':
+	class { '::heat':
 		keystone_password => $icclab::params::one_to_rule_them_all,
 		sql_connection    => 'mysql://heat:${icclab::params::one_to_rule_them_all}@${icclab::params::controller_node_int_address}/heat',
 		auth_uri          => 'http://${icclab::params::controller_node_int_address}:5000/v2.0',
@@ -33,8 +33,8 @@ class icclab::heat {
 		rabbit_host       => $icclab::params::controller_node_int_address,
 		rabbit_userid     => $icclab::params::one_to_rule_them_all,
 		rabbit_password   => $icclab::params::one_to_rule_them_all,
-	} ->
-
+	}
+	
 	class { 'heat::engine': 
 		heat_stack_user_role          => 'heat_stack_user',
 	  	heat_metadata_server_url      => "http://${icclab::params::controller_node_int_address}:8000",
