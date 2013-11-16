@@ -5,6 +5,7 @@ class icclab::ceilometer::controller inherits icclab::ceilometer::common {
   class { '::ceilometer::db::mysql':
     user     => 'ceilometer',
     password => $icclab::params::one_to_rule_them_all,
+    allowed_hosts => ['127.0.0.1',$icclab::params::controller_node_int_address],
   }
   
   class { '::ceilometer::db':

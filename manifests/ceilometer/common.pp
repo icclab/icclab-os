@@ -6,7 +6,7 @@ class icclab::ceilometer::common {
     metering_secret    => $icclab::params::one_to_rule_them_all,
     verbose            => $icclab::params::verbose,
     rabbit_host        => $icclab::params::controller_node_int_address,
-    rabbit_userid      => $icclab::params::one_to_rule_them_all,
+    rabbit_userid      => 'openstack',
     rabbit_password    => $icclab::params::one_to_rule_them_all,
   }
 
