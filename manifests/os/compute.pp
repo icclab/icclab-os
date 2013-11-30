@@ -43,10 +43,18 @@ class icclab::os::compute {
   }
   
   if $icclab::params::use_ryu{
+    
+    class {'ryu': 
+      wsapi_host      => $icclab::params::controller_node_int_address,
+      ofp_listen_host => $icclab::params::controller_node_int_address,
+    }
+
     class {'ryu::ryu_node':
-      neutron_db_pass    => $icclab::params::one_to_rule_them_all,
+      db_pass            => $icclab::params::one_to_rule_them_all,
       db_host            => $icclab::params::controller_node_int_address,
       ryu_server_ip      => $icclab::params::controller_node_int_address,
+      ovsdb_interface    => $icclab::params::public_interface,
+      tunnel_interface   => $icclab::params::public_interface,
     }
   }
 

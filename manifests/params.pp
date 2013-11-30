@@ -14,6 +14,8 @@ class icclab::params{
   $install_haas                 = false
   $install_ceilometer           = false
   $install_heat                 = false
+  $install_lb                   = false
+  $install_fw                   = false
   $use_ryu                      = false
   /* --------------------------------------------------*/
 

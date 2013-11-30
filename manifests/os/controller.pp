@@ -54,10 +54,18 @@ class icclab::os::controller {
   }
 
   if $icclab::params::use_ryu{
+    
+    class {'ryu': 
+      wsapi_host      => $icclab::params::controller_node_int_address,
+      ofp_listen_host => $icclab::params::controller_node_int_address,
+    }
+
     class {'ryu::ryu_server':
-      neutron_db_pass    => $icclab::params::one_to_rule_them_all,
+      db_pass            => $icclab::params::one_to_rule_them_all,
       db_host            => $icclab::params::controller_node_int_address,
       ryu_server_ip      => $icclab::params::controller_node_int_address,
+      ovsdb_interface    => $icclab::params::public_interface,
+      tunnel_interface   => $icclab::params::public_interface,
     }
   }
 
@@ -83,5 +91,13 @@ class icclab::os::controller {
     class {'icclab::heat': 
       require => Class['Openstack::Controller'],
     }
+  }
+
+  if $icclab::install_lb{
+    class {'icclab::loadbalancer':}
+  }
+
+  if $icclab::install_fw{
+    class {'icclab::firewall':}
   }
 }

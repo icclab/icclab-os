@@ -31,7 +31,7 @@ class icclab::heat {
 		keystone_host     => $icclab::params::controller_node_int_address,
 		verbose           => $icclab::params::verbose,
 		rabbit_host       => $icclab::params::controller_node_int_address,
-		rabbit_userid     => $icclab::params::one_to_rule_them_all,
+		rabbit_userid     => 'openstack', #fixme
 		rabbit_password   => $icclab::params::one_to_rule_them_all,
 	}
 	
