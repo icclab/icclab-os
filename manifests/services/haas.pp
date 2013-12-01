@@ -1,4 +1,4 @@
-class icclab::haas {
+class icclab::services::haas {
 
 	include icclab::params
 

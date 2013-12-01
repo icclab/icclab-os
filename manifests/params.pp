@@ -13,10 +13,13 @@ class icclab::params{
   $install_images               = false
   $install_haas                 = false
   $install_ceilometer           = false
-  $install_heat                 = false
-  $install_lb                   = false
-  $install_fw                   = false
+  $install_heat                 = true
   $use_ryu                      = false
+  $network_services = [
+            'neutron.services.loadbalancer.plugin.LoadBalancerPlugin', 
+            'neutron.services.firewall.fwaas_plugin.FirewallPlugin',
+            'neutron.services.vpn.plugin.VPNDriverPlugin',
+  ]
   /* --------------------------------------------------*/
 
   $enabled_apis                 = 'ec2,osapi_compute,metadata'
@@ -30,5 +33,21 @@ class icclab::params{
     $libvirt                    = 'qemu'
   } else {
     $libvirt                    = 'kvm'
+  }
+
+  if member($network_services, 'neutron.services.loadbalancer.plugin.LoadBalancerPlugin'){
+    $install_lb = true
+  }
+  if member($network_services, 'neutron.services.firewall.fwaas_plugin.FirewallPlugin'){
+    $install_fw = true
+  }
+  if member($network_services, 'neutron.services.vpn.plugin.VPNDriverPlugin'){
+    $install_vpn = true
+  }
+
+  if size($network_services) > 0{
+    neutron_config{
+      'DEFAULT/service_plugins': value => join($network_services,",");    
+    } 
   }
 }

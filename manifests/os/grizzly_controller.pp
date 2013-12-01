@@ -60,19 +60,19 @@ class icclab::os::grizzly_controller {
   }
 
   if $icclab::params::install_ceilometer {
-    class { 'icclab::ceilometer::controller': 
+    class { 'icclab::services::ceilometer::controller': 
       require => Class['Openstack::Controller'],
     }
   }
 
   if $icclab::params::install_haas {
-    class {'icclab::haas': 
+    class {'icclab::services::haas': 
       require => Class['Openstack::Controller'],
     }
   }
 
   if $icclab::params::install_heat {
-    class {'icclab::heat': 
+    class {'icclab::services::heat': 
       require => Class['Openstack::Controller'],
     }
   }

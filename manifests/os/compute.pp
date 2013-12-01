@@ -59,7 +59,7 @@ class icclab::os::compute {
   }
 
   if $icclab::params::install_ceilometer {
-    class {'icclab::ceilometer::compute': 
+    class {'icclab::services::ceilometer::compute': 
       require => Class['Openstack::Compute'],
     }
   }

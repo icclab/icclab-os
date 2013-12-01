@@ -1,4 +1,4 @@
-class icclab::ceilometer::common {
+class icclab::services::ceilometer::common {
   
   include icclab::params
   

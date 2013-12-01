@@ -1,4 +1,4 @@
-class icclab::ceilometer::controller inherits icclab::ceilometer::common {
+class icclab::services::ceilometer::controller inherits icclab::services::ceilometer::common {
 
   include icclab::params
 

@@ -76,28 +76,59 @@ class icclab::os::controller {
   }
 
   if $icclab::params::install_ceilometer {
-    class { 'icclab::ceilometer::controller': 
+    class { 'icclab::services::ceilometer::controller': 
       require => Class['Openstack::Controller'],
     }
   }
 
   if $icclab::params::install_haas {
-    class {'icclab::haas': 
+    class {'icclab::services::haas': 
       require => Class['Openstack::Controller'],
     }
   }
 
   if $icclab::params::install_heat {
-    class {'icclab::heat': 
+    class {'icclab::services::heat': 
       require => Class['Openstack::Controller'],
     }
   }
 
-  if $icclab::install_lb{
-    class {'icclab::loadbalancer':}
+  if $icclab::params::install_lb{
+    class {'neutron::agents::lbaas':
+      debug            => false,
+      interface_driver => 'neutron.agent.linux.interface.OVSInterfaceDriver',
+      device_driver    => 'neutron.services.loadbalancer.drivers.haproxy.namespace_driver.HaproxyNSDriver',
+    } ->
+    
+    exec { "horizon_enable_lb":
+      command => "echo \"OPENSTACK_NEUTRON_NETWORK['enable_lb'] = True\" >> /etc/openstack-dashboard/local_settings.py",
+      path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
+      unless  => "grep \"\['enable_lb'\] = True\" /etc/openstack-dashboard/local_settings.py",
+      #require => Package['savanna-dashboard'],
+    }
   }
 
-  if $icclab::install_fw{
-    class {'icclab::firewall':}
+  if $icclab::params::install_fw{
+    class {'neutron::services::fwaas':} ->
+
+    exec { "horizon_enable_fw":
+      command => "echo \"OPENSTACK_NEUTRON_NETWORK['enable_firewall'] = True\" >> /etc/openstack-dashboard/local_settings.py",
+      path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
+      unless  => "grep \"\['enable_firewall'\] = True\" /etc/openstack-dashboard/local_settings.py",
+      #require => Package['savanna-dashboard'],
+    }
+  }
+
+  if $icclab::params::install_vpn{
+    class {'neutron::agents::vpnaas':
+      vpn_device_driver => 'neutron.services.vpn.device_drivers.ipsec.OpenSwanDriver',
+    } ->
+    
+    exec { "horizon_enable_vpn":
+      command => "echo \"OPENSTACK_NEUTRON_NETWORK['enable_vpn'] = True\" >> /etc/openstack-dashboard/local_settings.py",
+      path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
+      unless  => "grep \"\['enable_vpn'\] = True\" /etc/openstack-dashboard/local_settings.py",
+      #require => Package['savanna-dashboard'],
+    }
   }
 }

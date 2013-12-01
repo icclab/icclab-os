@@ -9,4 +9,6 @@ class icclab::images {
     source           => 'http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-disk.img',
     require          => Class['Openstack::Glance']
   }
+
+  #TODO use images needed by HaaS and OpenShift, basic ubuntu also useful
 }

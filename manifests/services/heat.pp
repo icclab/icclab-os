@@ -1,7 +1,6 @@
 
-# TODO test me!
 
-class icclab::heat {
+class icclab::services::heat {
 	
 	include icclab::params
 
