@@ -109,7 +109,9 @@ class icclab::os::controller {
   }
 
   if $icclab::params::install_fw{
-    class {'neutron::services::fwaas':} ->
+    class {'neutron::services::fwaas':
+      require => Class['Neutron'],
+    } ->
 
     exec { "horizon_enable_fw":
       command => "echo \"OPENSTACK_NEUTRON_NETWORK['enable_firewall'] = True\" >> /etc/openstack-dashboard/local_settings.py",

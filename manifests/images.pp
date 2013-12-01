@@ -1,5 +1,7 @@
 class icclab::images {
-  #add images as are needed here
+  
+  include icclab::params
+  
   glance_image { "Cirros 0.3.1 x86_64":
     ensure           => present,
     name             => "Cirros 0.3.1 x86_64",
@@ -10,5 +12,28 @@ class icclab::images {
     require          => Class['Openstack::Glance']
   }
 
-  #TODO use images needed by HaaS and OpenShift, basic ubuntu also useful
+  if icclab::params::install_haas{
+    # also: http://savanna-files.mirantis.com/savanna-0.3-vanilla-1.2.1-fedora-19.qcow2
+    glance_image { "savanna-0.3-vanilla-1.2.1-ubuntu-13.04":
+      ensure           => present,
+      name             => "savanna-0.3-vanilla-1.2.1-ubuntu-13.04",
+      is_public        => yes,
+      container_format => bare,
+      disk_format      => 'qcow2',
+      source           => 'http://savanna-files.mirantis.com/savanna-0.3-vanilla-1.2.1-ubuntu-13.04.qcow2',
+      require          => Class['Openstack::Glance']
+    }  
+  }
+
+  if icclab::params::install_heat {  
+    glance_image { "F17-x86_64-cfntools":
+      ensure           => present,
+      name             => "F17-x86_64-cfntools",
+      is_public        => yes,
+      container_format => bare,
+      disk_format      => 'qcow2',
+      source           => 'http://fedorapeople.org/groups/heat/prebuilt-jeos-images/F17-x86_64-cfntools.qcow2',
+      require          => Class['Openstack::Glance']
+    } 
+  }
 }
