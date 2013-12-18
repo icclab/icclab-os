@@ -60,7 +60,7 @@ class icclab::os::controller {
       ofp_listen_host => $icclab::params::controller_node_int_address,
     }
 
-    class {'ryu::ryu_server':
+    class {'ryu::os::ryu_server':
       db_pass            => $icclab::params::one_to_rule_them_all,
       db_host            => $icclab::params::controller_node_int_address,
       ryu_server_ip      => $icclab::params::controller_node_int_address,

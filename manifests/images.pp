@@ -25,14 +25,32 @@ class icclab::images {
     }  
   }
 
-  if icclab::params::install_heat {  
-    glance_image { "F17-x86_64-cfntools":
+  if icclab::params::install_heat {
+    # glance_image { "F18-x86_64-cfntools":
+    #   ensure           => present,
+    #   name             => "F18-x86_64-cfntools",
+    #   is_public        => yes,
+    #   container_format => bare,
+    #   disk_format      => 'qcow2',
+    #   source           => 'http://fedorapeople.org/groups/heat/prebuilt-jeos-images/F18-x86_64-cfntools.qcow2',
+    #   require          => Class['Openstack::Glance']
+    # } 
+    glance_image { "F18-x86_64-openshift-origin-broker-cfntools":
       ensure           => present,
-      name             => "F17-x86_64-cfntools",
+      name             => "F18-x86_64-openshift-origin-broker-cfntools",
       is_public        => yes,
       container_format => bare,
       disk_format      => 'qcow2',
-      source           => 'http://fedorapeople.org/groups/heat/prebuilt-jeos-images/F17-x86_64-cfntools.qcow2',
+      source           => 'http://fedorapeople.org/groups/heat/prebuilt-jeos-images/F18-x86_64-openshift-origin-broker-cfntools.qcow2',
+      require          => Class['Openstack::Glance']
+    } 
+    glance_image { "F18-x86_64-openshift-origin-node-cfntools":
+      ensure           => present,
+      name             => "F18-x86_64-openshift-origin-node-cfntools",
+      is_public        => yes,
+      container_format => bare,
+      disk_format      => 'qcow2',
+      source           => 'http://fedorapeople.org/groups/heat/prebuilt-jeos-images/F18-x86_64-openshift-origin-node-cfntools.qcow2',
       require          => Class['Openstack::Glance']
     } 
   }

@@ -10,7 +10,7 @@ class icclab::params{
   $traffic_egress_interface     = 'eth2'
 	$private_interface            = 'eth1' #10.10.10.0/24
 	$NewRelic_API_Key             = ''
-  $install_images               = true
+  $install_images               = false
   $install_haas                 = true
   $install_ceilometer           = true
   $install_heat                 = true
