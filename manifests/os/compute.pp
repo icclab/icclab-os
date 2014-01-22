@@ -35,6 +35,7 @@ class icclab::os::compute {
     rabbit_host           => $icclab::params::controller_node_int_address,
     glance_api_servers    => "${icclab::params::controller_node_int_address}:9292",
     vncproxy_host         => $icclab::params::controller_node_ext_address,
+    iscsi_ip_address      => $internal_address_tmp,
   } ->
 
   class {'icclab::networking':
