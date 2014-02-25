@@ -15,10 +15,13 @@ class icclab::params{
   $install_ceilometer           = true
   $install_heat                 = true
   $use_ryu                      = false
+  # $network_services = [
+  #           'neutron.services.loadbalancer.plugin.LoadBalancerPlugin', 
+  #           'neutron.services.firewall.fwaas_plugin.FirewallPlugin',
+  #           'neutron.services.vpn.plugin.VPNDriverPlugin',
+  # ]
   $network_services = [
             'neutron.services.loadbalancer.plugin.LoadBalancerPlugin', 
-            'neutron.services.firewall.fwaas_plugin.FirewallPlugin',
-            'neutron.services.vpn.plugin.VPNDriverPlugin',
   ]
   /* --------------------------------------------------*/
 
