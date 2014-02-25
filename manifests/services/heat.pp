@@ -35,6 +35,7 @@ class icclab::services::heat {
 	}
 	
 	class { 'heat::engine': 
+		auth_encryption_key           => $icclab::params::one_to_rule_them_all,
 		heat_stack_user_role          => 'heat_stack_user',
 	  	heat_metadata_server_url      => "http://${icclab::params::controller_node_int_address}:8000",
 	  	heat_waitcondition_server_url => "http://${icclab::params::controller_node_int_address}:8000/v1/waitcondition",

@@ -11,7 +11,7 @@ class icclab::params{
 	$private_interface            = 'eth1' #10.10.10.0/24
 	$NewRelic_API_Key             = ''
   $install_images               = false
-  $install_haas                 = true
+  $install_haas                 = false
   $install_ceilometer           = true
   $install_heat                 = true
   $use_ryu                      = false
