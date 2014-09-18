@@ -16,7 +16,7 @@ class icclab::services::ceilometer::controller inherits icclab::services::ceilom
     password           => $icclab::params::one_to_rule_them_all,
     auth_name          => 'ceilometer',
     service_type       => 'metering',
-    public_address     => $icclab::params::controller_node_int_address,
+    public_address     => $icclab::params::controller_node_ext_address,
     admin_address      => $icclab::params::controller_node_int_address,
     internal_address   => $icclab::params::controller_node_int_address,
   }
