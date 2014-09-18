@@ -2,12 +2,14 @@
 #
 #
 class icclab::os::controller {
-  
+
   include icclab::params
   include 'apache'
 
   #use stages so we've a little more ordering
-  class { 'icclab::base':} ->
+  class { 'icclab::base':
+    ntp_servers            => $icclab::params::ntp_servers,
+  } ->
 
   class { 'openstack::controller':
     # network
@@ -54,8 +56,8 @@ class icclab::os::controller {
   }
 
   if $icclab::params::use_ryu{
-    
-    class {'ryu': 
+
+    class {'ryu':
       wsapi_host      => $icclab::params::controller_node_int_address,
       ofp_listen_host => $icclab::params::controller_node_int_address,
     }
@@ -70,25 +72,25 @@ class icclab::os::controller {
   }
 
   if $icclab::params::install_images {
-    class {'icclab::images': 
+    class {'icclab::images':
       require => Class['Openstack::Controller'],
     }
   }
 
   if $icclab::params::install_ceilometer {
-    class { 'icclab::services::ceilometer::controller': 
+    class { 'icclab::services::ceilometer::controller':
       require => Class['Openstack::Controller'],
     }
   }
 
   if $icclab::params::install_haas {
-    class {'icclab::services::haas': 
+    class {'icclab::services::haas':
       require => Class['Openstack::Controller'],
     }
   }
 
   if $icclab::params::install_heat {
-    class {'icclab::services::heat': 
+    class {'icclab::services::heat':
       require => Class['Openstack::Controller'],
     }
   }
@@ -99,7 +101,7 @@ class icclab::os::controller {
       interface_driver => 'neutron.agent.linux.interface.OVSInterfaceDriver',
       device_driver    => 'neutron.services.loadbalancer.drivers.haproxy.namespace_driver.HaproxyNSDriver',
     } ->
-    
+
     exec { "horizon_enable_lb":
       command => "echo \"OPENSTACK_NEUTRON_NETWORK['enable_lb'] = True\" >> /etc/openstack-dashboard/local_settings.py",
       path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",
@@ -125,7 +127,7 @@ class icclab::os::controller {
     class {'neutron::agents::vpnaas':
       vpn_device_driver => 'neutron.services.vpn.device_drivers.ipsec.OpenSwanDriver',
     } ->
-    
+
     exec { "horizon_enable_vpn":
       command => "echo \"OPENSTACK_NEUTRON_NETWORK['enable_vpn'] = True\" >> /etc/openstack-dashboard/local_settings.py",
       path    => "/usr/bin:/usr/sbin:/bin:/usr/local/bin",

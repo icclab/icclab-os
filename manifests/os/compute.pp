@@ -1,7 +1,7 @@
 class icclab::os::compute {
 
   include icclab::params
-  
+
   if $icclab::params::is_vagrant {
     $internal_address_tmp = $ipaddress_eth1
   }
@@ -9,7 +9,9 @@ class icclab::os::compute {
     $internal_address_tmp = $ipaddress_eth0
   }
 
-  class { 'icclab::base':} ->
+  class { 'icclab::base':
+    ntp_servers           => [$icclab::params::controller_node_int_address],
+  } ->
 
   class { 'openstack::compute':
     # network
@@ -42,10 +44,10 @@ class icclab::os::compute {
     network_interface_template => 'icclab/compute_interfaces.erb',
     require => Class['Openstack::Compute'],
   }
-  
+
   if $icclab::params::use_ryu{
-    
-    class {'ryu': 
+
+    class {'ryu':
       wsapi_host      => $icclab::params::controller_node_int_address,
       ofp_listen_host => $icclab::params::controller_node_int_address,
     }
@@ -60,7 +62,7 @@ class icclab::os::compute {
   }
 
   if $icclab::params::install_ceilometer {
-    class {'icclab::services::ceilometer::compute': 
+    class {'icclab::services::ceilometer::compute':
       require => Class['Openstack::Compute'],
     }
   }

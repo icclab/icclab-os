@@ -16,12 +16,12 @@ class icclab::params{
   $install_heat                 = true
   $use_ryu                      = false
   # $network_services = [
-  #           'neutron.services.loadbalancer.plugin.LoadBalancerPlugin', 
+  #           'neutron.services.loadbalancer.plugin.LoadBalancerPlugin',
   #           'neutron.services.firewall.fwaas_plugin.FirewallPlugin',
   #           'neutron.services.vpn.plugin.VPNDriverPlugin',
   # ]
   $network_services = [
-            'neutron.services.loadbalancer.plugin.LoadBalancerPlugin', 
+            'neutron.services.loadbalancer.plugin.LoadBalancerPlugin',
   ]
   /* --------------------------------------------------*/
 
@@ -50,7 +50,7 @@ class icclab::params{
 
   if size($network_services) > 0{
     neutron_config{
-      'DEFAULT/service_plugins': value => join($network_services,",");    
-    } 
+      'DEFAULT/service_plugins': value => join($network_services,",");
+    }
   }
 }

@@ -1,14 +1,16 @@
-class icclab::base {
+class icclab::base (
+	$ntp_servers,
+){
 
 	include icclab::params
-	
+
 	class { 'ntp':
-		servers    => $icclab::params::ntp_servers,
+		servers    => $ntp_servers,
 	}
 
 	if $icclab::params::NewRelic_API_Key {
 		#class { 'newrelic': license => $icclab::params::NewRelic_API_Key }
-		newrelic::server { 'controller': 
+		newrelic::server { 'controller':
 			newrelic_license_key => $icclab::params::NewRelic_API_Key,
 		}
 	}
