@@ -19,6 +19,8 @@ class icclab::os::controller {
     public_address         => $icclab::params::controller_node_ext_address,
     internal_address       => $icclab::params::controller_node_int_address,
     admin_address          => $icclab::params::controller_node_int_address,
+    token_format           => 'UUID'
+    
     # neutron
     external_bridge_name   => $icclab::params::external_bridge_name,
     bridge_interface       => $icclab::params::traffic_egress_interface, # what br-ex gets connected to - eth1
